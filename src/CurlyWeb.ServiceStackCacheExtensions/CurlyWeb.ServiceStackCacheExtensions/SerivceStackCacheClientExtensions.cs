@@ -8,7 +8,7 @@
     public static T GetOrSet< T >( this ICacheClient cacheClient, string key, Func< T > expression, TimeSpan expiresIn )
     {
       var found = cacheClient.Get< T >( key );
-      if( found != null )
+      if( !Equals( found, default( T ) ) )
         return found;
 
       var executed = expression.Invoke();
